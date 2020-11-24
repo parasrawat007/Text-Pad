@@ -148,16 +148,12 @@ namespace WindowsFormsApplication1
             if (saveFileDialog1.CheckPathExists)
             {
                 RichTextBox o = null;
-                label1.Text = openFileDialog1.FileName;
-                label2.Text = tabControl1.SelectedTab.Text;
                 if (p1.Controls.Contains(r))
-                    o = p1.Controls["Page"] as RichTextBox;
+                o = p1.Controls["Page"] as RichTextBox;
                 o.SaveFile(saveFileDialog1.FileName);
 
             }
             else {
-                label1.Text = openFileDialog1.FileName;
-                label2.Text = tabControl1.SelectedTab.Text;
                 saveFileDialog1.ShowDialog();
             }
         }
@@ -215,7 +211,6 @@ namespace WindowsFormsApplication1
                 
                 if (result == DialogResult.Yes)
                 { 
-                    label3.Text = "Exit";
                     Application.Exit();
                 }
                 else if(result == DialogResult.No)
@@ -499,25 +494,25 @@ namespace WindowsFormsApplication1
 
         private void speechToTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
-            //rec.
-            Grammar dictationGrammar = new DictationGrammar();
-            recognizer.LoadGrammar(dictationGrammar);
-            try
-            {
+            //SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
+            ////rec.
+            //Grammar dictationGrammar = new DictationGrammar();
+            //recognizer.LoadGrammar(dictationGrammar);
+            //try
+            //{
                 
-                recognizer.SetInputToDefaultAudioDevice();
-                RecognitionResult result = recognizer.Recognize();
-                label1.Text = result.Text;
-            }
-            catch (InvalidOperationException exception)
-            {
-                label1.Text = String.Format("Could not recognize input from default aduio device. Is a microphone or sound card available?\r\n{0} - {1}.", exception.Source, exception.Message);
-            }
-            finally
-            {
-                recognizer.UnloadAllGrammars();
-            }                         
+            //    recognizer.SetInputToDefaultAudioDevice();
+            //    RecognitionResult result = recognizer.Recognize();
+            //   // label1.Text = result.Text;
+            //}
+            //catch (InvalidOperationException exception)
+            //{
+            //   // label1.Text = String.Format("Could not recognize input from default aduio device. Is a microphone or sound card available?\r\n{0} - {1}.", exception.Source, exception.Message);
+            //}
+            //finally
+            //{
+            //    recognizer.UnloadAllGrammars();
+            //}                         
            
         }
 
@@ -545,8 +540,7 @@ namespace WindowsFormsApplication1
 
             if (p1.Controls.Contains(r))
                 o = p1.Controls["Page"] as RichTextBox;
-            label1.Text = o.SelectedText;
-
+           
             if (o.SelectionFont != new Font(o.Font, FontStyle.Underline))
             {
                 underlineToolStripMenuItem.Checked = true;
@@ -603,7 +597,7 @@ namespace WindowsFormsApplication1
 
             if (p1.Controls.Contains(r))
                 o = p1.Controls["Page"] as RichTextBox;
-            label1.Text = o.SelectedText;
+          
 
             if (o.SelectionFont != new Font(o.Font, FontStyle.Italic))
             {
@@ -640,7 +634,7 @@ namespace WindowsFormsApplication1
             RichTextBox o = null;
             if (p1.Controls.Contains(r))
                 o = p1.Controls["Page"] as RichTextBox;
-            label1.Text = o.Text;
+            
             
             // Speak a string.  
             synth.Speak(o.Text);
@@ -669,7 +663,7 @@ namespace WindowsFormsApplication1
 
             if (p1.Controls.Contains(r))
                 o = p1.Controls["Page"] as RichTextBox;
-            label1.Text = o.SelectedText;
+           
 
             if (o.SelectionFont != new Font(o.Font, FontStyle.Bold))
             {
@@ -692,7 +686,7 @@ namespace WindowsFormsApplication1
 
             if (p1.Controls.Contains(r))
                 o = p1.Controls["Page"] as RichTextBox;
-            label1.Text = o.SelectedText;
+           
 
             if (o.SelectionFont != new Font(o.Font, FontStyle.Strikeout))
             {
@@ -709,7 +703,7 @@ namespace WindowsFormsApplication1
             o.DeselectAll();
         }
 
-        int i = 0;
+      
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -719,17 +713,7 @@ namespace WindowsFormsApplication1
 
             var o = pnl.Controls["Page"] as RichTextBox;
             toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
-            //if (tab.Contains(new Panel()))
-            //{
-            //    label3.Text = (i++).ToString();
-            //    var pnl = tab.Controls["RTBPanel"] as Panel;
-            //    if (pnl.Contains(r))
-            //    {
-            //        var o = pnl.Controls["Page"] as RichTextBox;
-            //        toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
-            //    }
-            //}
-
+          
         }
 
 
