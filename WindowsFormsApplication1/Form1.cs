@@ -30,8 +30,6 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-
-
         }
 
         //For new tab
@@ -65,7 +63,7 @@ namespace WindowsFormsApplication1
             tb.Size = new System.Drawing.Size(1047, 409);
             tb.TabIndex = 0;
             tb.UseVisualStyleBackColor = true;
-            tb.Enter += TabFocused;
+         
 
             // 
             // panel1
@@ -91,8 +89,6 @@ namespace WindowsFormsApplication1
             r.TabIndex = 0;
 
             
-
-
             //other
             r.Font = new Font("Microsoft Sans Serif", 18);
             tabControl1.TabPages.Add(tb);
@@ -102,29 +98,24 @@ namespace WindowsFormsApplication1
             r.Focus();
 
             r.KeyDown += Page_keyDown;
+          
 
             ++n;
         }
-
+        
         private void TabFocused(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = sender as TabPage;
+
+            //var p = sender as TabPage;
+            //if (p.Contains(p1))
+            //{
+            //    var pnl = p.Controls["RTBPanel"] as Panel;
+            //    var o = pnl.Controls["Page"] as RichTextBox;
+            //    o.Text += (i++).ToString();
+            //    toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
+            //}
         }
 
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var tabpage = sender as TabPage;
-
-            if (tabpage == null)
-            {
-                label3.Text = "Tab Page NUll";
-
-            }
-            else
-            {
-                label3.Text = tabpage.Text;
-            }
-        }
 
         private void Page_keyDown(object sender, KeyEventArgs e)
         {
@@ -230,7 +221,6 @@ namespace WindowsFormsApplication1
                 else if(result == DialogResult.No)
                 {
                     saveToolStripMenuItem.PerformClick();
-
                 }
             }
             else
@@ -719,17 +709,27 @@ namespace WindowsFormsApplication1
             o.DeselectAll();
         }
 
-        int i=0;
-        private void tabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
+        int i = 0;
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-          if(tabControl1.SelectedTab.Contains(p1))
-            {
-               label3.Text = "wooooooooooooo";
-               var o= tabControl1.SelectedTab.Controls["RTBPanel"].Controls["Page"] as RichTextBox;
-                o.Text += "  " + (i++) + "  ";
-                toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
-            }
-            
+
+            var tab = tabControl1.SelectedTab;
+
+            var pnl =tab.Controls["RTBPanel"] as Panel;
+
+            var o = pnl.Controls["Page"] as RichTextBox;
+            toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
+            //if (tab.Contains(new Panel()))
+            //{
+            //    label3.Text = (i++).ToString();
+            //    var pnl = tab.Controls["RTBPanel"] as Panel;
+            //    if (pnl.Contains(r))
+            //    {
+            //        var o = pnl.Controls["Page"] as RichTextBox;
+            //        toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
+            //    }
+            //}
+
         }
 
 
