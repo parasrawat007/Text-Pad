@@ -53,7 +53,7 @@ namespace WindowsFormsApplication1
             p.Name = "LabelLane";
             p1.Name = "RTBPanel";
             tb.Name = "Tab " + n;
-            l.Name = "Line";
+            l.Name = "Line 1";
             
             // 
             // tabPage1
@@ -71,35 +71,41 @@ namespace WindowsFormsApplication1
             // panel1
             // 
             p.Dock = System.Windows.Forms.DockStyle.Left;
-            p.Location = new System.Drawing.Point(3, 3);
-            p.Size = new System.Drawing.Size(38, 403);
-            p.TabIndex = 0;
+            p.AutoSize = true;
+            //p.Location = new System.Drawing.Point(3, 3);
+            //p.Size = new System.Drawing.Size(38, 403);
+            //p.TabIndex = 0;
 
 
             //
             // label
             //
-
-
+            l.AutoSize = true;
+            
+            l.Text =" 1.\n";
+            
+            p.Controls.Add(l);
+            
             // 
             // panel2
             // 
             p1.Controls.Add(r);
             p1.Dock = System.Windows.Forms.DockStyle.Fill;
-            p1.Location = new System.Drawing.Point(47, 3);
-            p1.Size = new System.Drawing.Size(997, 403);
+            //p1.Location = new System.Drawing.Point(47, 3);
+            //p1.Size = new System.Drawing.Size(997, 403);
             p1.TabIndex = 1;
             // 
             // richTextBox1
             // 
             r.Dock = System.Windows.Forms.DockStyle.Fill;
-            r.Location = new System.Drawing.Point(0, 0);
-            r.Size = new System.Drawing.Size(997, 403);
+            //r.Location = new System.Drawing.Point(0, 0);
+            //r.Size = new System.Drawing.Size(997, 403);
             r.TabIndex = 0;
 
             
             //other
             r.Font = new Font("Microsoft Sans Serif", 18);
+            l.Font = new Font(FontFamily.GenericSerif, r.Font.Size, r.Font.Unit);
             tabControl1.TabPages.Add(tb);
             tabControl1.SelectTab(tb);
             tabControl1.SelectedTab.Focus();
@@ -130,6 +136,15 @@ namespace WindowsFormsApplication1
             var rtb = sender as RichTextBox;
 
             toolStripStatusLabel2.Text = rtb.Text.Split(' ').Length.ToString();
+            l.Text = "";
+            var tab = tabControl1.SelectedTab;
+            var pnl = tab.Controls["LabelPanel"] as Panel;
+            for (int i=1;i<=rtb.Lines.Length;i++)
+            {
+                l.Text += " "+i+".\n";
+                
+
+            }
         }
 
      
