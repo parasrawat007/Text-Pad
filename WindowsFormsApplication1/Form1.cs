@@ -30,9 +30,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            
+
+
         }
-        
+
         //For new tab
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -44,12 +45,16 @@ namespace WindowsFormsApplication1
             //
             //
             r = new RichTextBox();
-            r.Name = "r1";
-             p = new Panel();
+            p = new Panel();
             p1 = new Panel();
-            TabPage tb = new TabPage(s);            
-            
+            TabPage tb = new TabPage(s);
 
+            //Componets Naming
+            r.Name = "Page";
+            p.Name = "LabelLane";
+            p1.Name = "RTBPanel";
+            tb.Name = "Tab " + n;
+            
             // 
             // tabPage1
             // 
@@ -60,6 +65,8 @@ namespace WindowsFormsApplication1
             tb.Size = new System.Drawing.Size(1047, 409);
             tb.TabIndex = 0;
             tb.UseVisualStyleBackColor = true;
+            tb.Enter += TabFocused;
+
             // 
             // panel1
             // 
@@ -82,7 +89,6 @@ namespace WindowsFormsApplication1
             r.Location = new System.Drawing.Point(0, 0);
             r.Size = new System.Drawing.Size(997, 403);
             r.TabIndex = 0;
-            r.Name = "Page";
 
             
 
@@ -92,9 +98,42 @@ namespace WindowsFormsApplication1
             tabControl1.TabPages.Add(tb);
             tabControl1.SelectTab(tb);
             tabControl1.SelectedTab.Focus();
+            
+            r.Focus();
+
+            r.KeyDown += Page_keyDown;
+
             ++n;
         }
 
+        private void TabFocused(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = sender as TabPage;
+        }
+
+        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var tabpage = sender as TabPage;
+
+            if (tabpage == null)
+            {
+                label3.Text = "Tab Page NUll";
+
+            }
+            else
+            {
+                label3.Text = tabpage.Text;
+            }
+        }
+
+        private void Page_keyDown(object sender, KeyEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+
+            toolStripStatusLabel2.Text = rtb.Text.Split(' ').Length.ToString();
+        }
+
+     
 
         // to remove tab
 
@@ -181,14 +220,22 @@ namespace WindowsFormsApplication1
                 o = p1.Controls["Page"] as RichTextBox;
             if (o.Text.Length != 0)
             {
-
-                MessageBox.Show("Ae you Sure You Want to Exit");
+                var result= MessageBox.Show("Are you sure You want to Exit Without Saving", "Text Pad", MessageBoxButtons.YesNoCancel);
                 
-               
+                if (result == DialogResult.Yes)
+                { 
+                    label3.Text = "Exit";
+                    Application.Exit();
+                }
+                else if(result == DialogResult.No)
+                {
+                    saveToolStripMenuItem.PerformClick();
+
+                }
             }
             else
             {
-                System.Windows.Forms.Application.Exit();
+                Application.Exit();
             }
         }
 
@@ -671,5 +718,26 @@ namespace WindowsFormsApplication1
             }
             o.DeselectAll();
         }
+
+        int i=0;
+        private void tabControl1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+          if(tabControl1.SelectedTab.Contains(p1))
+            {
+               label3.Text = "wooooooooooooo";
+               var o= tabControl1.SelectedTab.Controls["RTBPanel"].Controls["Page"] as RichTextBox;
+                o.Text += "  " + (i++) + "  ";
+                toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
+            }
+            
+        }
+
+
+
+
+
+
+
+
     }
 }
