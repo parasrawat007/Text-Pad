@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1
         Panel p;
         Panel p1;
         Form2 f = new Form2();
-       
+        Label l;
 
         public Form1()
         {
@@ -45,6 +45,7 @@ namespace WindowsFormsApplication1
             r = new RichTextBox();
             p = new Panel();
             p1 = new Panel();
+            l = new Label();
             TabPage tb = new TabPage(s);
 
             //Componets Naming
@@ -52,6 +53,7 @@ namespace WindowsFormsApplication1
             p.Name = "LabelLane";
             p1.Name = "RTBPanel";
             tb.Name = "Tab " + n;
+            l.Name = "Line";
             
             // 
             // tabPage1
@@ -72,6 +74,13 @@ namespace WindowsFormsApplication1
             p.Location = new System.Drawing.Point(3, 3);
             p.Size = new System.Drawing.Size(38, 403);
             p.TabIndex = 0;
+
+
+            //
+            // label
+            //
+
+
             // 
             // panel2
             // 
@@ -96,26 +105,25 @@ namespace WindowsFormsApplication1
             tabControl1.SelectedTab.Focus();
             
             r.Focus();
-
+            
             r.KeyDown += Page_keyDown;
-          
-
+            r.FontChanged += R_FontChanged;
+            
             ++n;
         }
-        
-        private void TabFocused(object sender, EventArgs e)
+
+        private void R_FontChanged(object sender, EventArgs e)
         {
+            var tab = tabControl1.SelectedTab;
+            var pnl = tab.Controls["LabelPanel"] as Panel;
+            var rtb = sender as RichTextBox;
 
-            //var p = sender as TabPage;
-            //if (p.Contains(p1))
-            //{
-            //    var pnl = p.Controls["RTBPanel"] as Panel;
-            //    var o = pnl.Controls["Page"] as RichTextBox;
-            //    o.Text += (i++).ToString();
-            //    toolStripStatusLabel2.Text = o.Text.Split(' ').Length.ToString();
-            //}
+            foreach(Label lbl in pnl.Controls)
+            {
+                lbl.Font = new Font(FontFamily.GenericSerif, rtb.Font.Size);
+            }
+            
         }
-
 
         private void Page_keyDown(object sender, KeyEventArgs e)
         {
@@ -716,12 +724,6 @@ namespace WindowsFormsApplication1
           
         }
 
-
-
-
-
-
-
-
+       
     }
 }
